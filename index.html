@@ -59,10 +59,11 @@
       <h3 class="section-title">Launch Countdown</h3>
       <!-- Edit the LAUNCH_AT value below to your real launch time (ISO8601: YYYY-MM-DDTHH:MM:SSZ) -->
       <div class="card" style="text-align:center;">
-        <div id="countdownTimer" style="font-size: clamp(20px, 6vw, 48px); font-weight: 800; letter-spacing: 1px; margin: 8px 0 6px;">
+        <div id="countdownTimer"
+          data-note="Timer updates every second" style="font-size: clamp(20px, 6vw, 48px); font-weight: 800; letter-spacing: 1px; margin: 8px 0 6px;">
           00d : 00h : 00m : 00s
         </div>
-        <div class="placeholder">Set <code>LAUNCH_AT</code> in the script to your time. Example: 2025-11-15T18:00:00Z</div>
+        <div class="placeholder">Target: <span id="countdownTargetMsg"></span></div>
       </div>
     </section>
 
@@ -168,7 +169,9 @@
         if (heroButtons) heroButtons.classList.add('hidden');
       }
     }
-    const timer = setInterval(updateCountdown, 1000);
+    const targetMsg = document.getElementById('countdownTargetMsg');
+if (targetMsg) { const d=parseLaunchTime(LAUNCH_AT); targetMsg.textContent = d? d.toISOString() : 'Invalid date'; }
+const timer = setInterval(updateCountdown, 1000);
     updateCountdown();
   </script>
 
